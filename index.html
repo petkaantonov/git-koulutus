@@ -61,6 +61,31 @@
 
             <section data-markdown>
                 <script type="text/template">
+#### Gitin configurointi
+
+Vaaditut asetukset
+
+```bash
+git config --global user.name "Etunimi Sukunimi"
+git config --global user.email "etunimi.sukunimi@esimerkki.fi"
+```
+
+Valinnaiset asetukset
+
+```bash
+# Värit
+git config --global color.ui true
+# Komento, jota käytetään kun Gitin tarvitsee käynnistää tekstieditori
+# Tässä Sublime Text 2 Linux
+git config --global core.editor "subl -n -w"
+```
+
+
+                </script>
+            </section>
+
+            <section data-markdown>
+                <script type="text/template">
                     #### Uuden paikallisen repositoryn alustus
                     ```bash
                     mkdir projekti
@@ -69,12 +94,8 @@
                     ```
 
                     ```bash
-                    Initialized empty Git repository in /home/petka/projekti/.git/
-                    ls -la
-                    total 12
-                    drwxrwxr-x  3 petka petka 4096 huhti 20 22:16 .
-                    drwxr-xr-x 47 petka petka 4096 huhti 20 22:16 ..
-                    drwxrwxr-x  7 petka petka 4096 huhti 20 22:16 .git
+                    ls -a
+                    .  ..  .git
                     ```
                 </script>
             </section>
