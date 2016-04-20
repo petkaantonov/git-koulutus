@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Reveal.js 3 Slide Demo</title>
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/white.css" id="theme">
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <style type="text/css">
+        .reveal {
+            font-family: Arial;
+        }
+
+        .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+            font-family: Arial;
+        }
+
+        .reveal pre {
+            font-size: 0.48em;
+        }
+
+        .reveal img {
+          margin: 0 !important;
+          background: none !important;
+          border: none !important;
+          box-shadow: none !important;
+        }
+
+
+        .reveal pre code {
+            max-height: 1000px;
+        }
+
+        body {
+          background-repeat: no-repeat;
+          background-position: 2% 97%;
+          background-size: 10%;
+        }
+    </style>
+    <!--Add support for earlier versions of Internet Explorer -->
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <!-- Wrap the entire slide show in a div using the "reveal" class. -->
+    <div class="reveal">
+        <!-- Wrap all slides in a single "slides" class -->
+        <div class="slides">
+
+            <!-- ALL SLIDES GO HERE -->
+            <!-- Each section element contains an individual slide -->
+            <section data-markdown>
+                <script type="text/template">
+                    # Git-perusteet
+
+                    #### Petka Antonov
+                </script>
+            </section>
+
+            <section data-markdown>
+                <script type="text/template">
+                    #### Uuden paikallisen repositoryn alustus
+                    ```bash
+                    mkdir projekti
+                    cd projekti
+                    git init
+                    ```
+
+                    ```bash
+                    Initialized empty Git repository in /home/petka/projekti/.git/
+                    ls -la
+                    total 12
+                    drwxrwxr-x  3 petka petka 4096 huhti 20 22:16 .
+                    drwxr-xr-x 47 petka petka 4096 huhti 20 22:16 ..
+                    drwxrwxr-x  7 petka petka 4096 huhti 20 22:16 .git
+                    ```
+                </script>
+            </section>
+<section data-markdown>
+<script type="text/template">#### Ensimmäisen commitin luonti
+
+Muutosten tekeminen
+
+```bash
+echo "This is the readme file" > README.md
+```
+
+Muutosten tarkastelu
+
+```bash
+git status
+git diff
+```
+
+Muutosten lisäys indeksiin
+
+```bash
+git add -A
+```
+
+Indeksimuutosten tarkastelu
+
+```bash
+git status
+git diff --cached
+```
+
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">#### Ensimmäisen commitin luonti
+
+Indeksissä olevien muutosten commitointi
+
+```bash
+git commit -m "Initial commit"
+```
+
+Versiohistorian selailu
+
+```bash
+git log
+```
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">#### Synkronointi palvelinrepositoryn kanssa
+
+Remoten lisäys
+
+```bash
+git remote add origin git@github.com:petkaantonov/projekti
+```
+
+Palvelinrepositoryllä olevien muutosten päivitys
+
+```bash
+git fetch origin
+```
+
+Palvelinrepositoryllä olevien muutosten omaksuminen
+
+```bash
+git rebase origin/master
+```
+
+</script>
+</section>
+
+
+<section data-markdown>
+<script type="text/template">#### Synkronointi palvelinrepositoryn kanssa
+
+Paikallisen repositoryn muutosten päivitys palvelimelle
+
+```
+git push -u origin master
+```
+
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+#### Branchin luonti
+
+Tilan tarkistus
+
+```bash
+git status
+```
+
+Luodaan branchi todennusfeaturelle
+
+```bash
+git checkout -b feature/authentication
+```
+
+Tällä hetkellä valitun branchin tarkistus
+
+```bash
+git branch
+```
+
+Siirtyminen takaisin johonkin toiseen branchiin
+
+```bash
+git checkout master
+```
+
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+#### Featuren toteutus branchissa
+
+Toteutus
+
+```bash
+git checkout feature/authentication
+echo "print 'hello world'" > init.py
+```
+
+Synkronointi palvelinrepositoryn kanssa katselmointia varten
+
+```bash
+git add -A && git commit -m "Implemented user authentication feature"
+git push -u origin feature/authentication
+```
+
+
+
+
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+#### Featuren toteutus branchissa
+
+Katselmoinnin jälkeen valmiin toteutuksen liittäminen masteriin
+
+```bash
+git checkout master
+git fetch origin && git rebase origin/master
+git merge feature/authentication
+```
+
+Siivous
+
+```bash
+git push origin --delete feature/authentication
+git branch -D feature/authentication
+```
+
+
+</script>
+</section>
+
+
+<section data-markdown>
+<script type="text/template">
+#### Releasen luonti
+
+```bash
+git checkout master
+git tag 1.0 master
+git push origin --tags
+```
+
+Releaseiden listaus
+
+```bash
+git tag
+```
+
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+#### Paikallisrepositoryn luonti palvelinrepositoryyn perustuen
+
+```bash
+cd ~
+rm -rf projekti
+```
+
+```bash
+git clone git@github.com:petkaantonov/projekti projekti
+cd projekti
+```
+</script>
+</section>
+
+<section data-markdown>
+<script type="text/template">
+#### Graafiset työkalut
+
+Git-työskentelyyn
+
+```bash
+git gui
+```
+
+Graafinen repositoryhistorian selain
+
+```bash
+gitk
+```
+
+
+
+</script>
+</section>
+
+
+        </div>
+    </div>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+        // Required, even if empty.
+        Reveal.initialize({
+            transition: 'none',
+            history: true,
+            progress: false,
+            dependencies: [
+                // Cross-browser shim that fully implements classList - https://github.com/eligrey/classList.js/
+                { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+
+                // Interpret Markdown in <section> elements
+                { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+
+                // Syntax highlight for <code> elements
+                { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+
+                // Zoom in and out with Alt+click
+                { src: 'plugin/zoom-js/zoom.js', async: true },
+
+                // Speaker notes
+                { src: 'plugin/notes/notes.js', async: true }
+            ]
+        });
+    </script>
+</body>
+</html>
